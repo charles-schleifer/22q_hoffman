@@ -1,2 +1,2 @@
 # 22q_hoffman
-Necessary scripts for preprocessing structural and functional MRI data on hoffman cluster
+Collection of scripts for preprocessing and first-level analysis of structural and functional MRI data on hoffman cluster
