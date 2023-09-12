@@ -8,7 +8,7 @@ sessions="01_S0009_00 01_S0012_00 01_S0016_00 01_S0019_00 01_S0027_00 01_S0032_0
 /u/project/cbearden/data/scripts/charlie/22q_hoffman/hoffman_submit/hoffman_submit_qunex.sh \
 --qunex_command="create_batch" \
 --qunex_options="--sessionsfolder=/u/project/cbearden/data/NAPLS_BOLD/NAPLS2/sessions/S_sessions/ \
---sourcefiles=session_hcp.txt \
+--sourcefiles=subject_hcp.txt \
 --targetfile=/u/project/cbearden/data/NAPLS_BOLD/NAPLS2/processing/NAPLS2_batch.txt \
 --overwrite=no \
 --paramfile=/u/project/cbearden/data/22q/qunex_studyfolder/sessions/specs/22q_trio_params.txt \
