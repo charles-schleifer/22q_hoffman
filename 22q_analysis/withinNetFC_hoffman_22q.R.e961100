@@ -1,0 +1,2 @@
+/work/UGE/8.6.4/n7068/job_scripts/961100: line 5: syntax error near unexpected token `'ciftiTools','
+/work/UGE/8.6.4/n7068/job_scripts/961100: line 5: `if(!require('ciftiTools', quietly=TRUE)){install.packages('ciftiTools')}'
