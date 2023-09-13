@@ -17,7 +17,7 @@ done
 /u/project/cbearden/data/scripts/charlie/22q_hoffman/hoffman_submit/hoffman_submit_qunex.sh \
 --qunex_command="create_batch" \
 --qunex_options="--sessionsfolder=/u/project/cbearden/data/NAPLS_BOLD/NAPLS2/sessions/S_sessions/ \
---sourcefiles=subject_hcp.txt \
+--sourcefiles=session_hcp.txt \
 --targetfile=/u/project/cbearden/data/NAPLS_BOLD/NAPLS2/processing/NAPLS2_batch.txt \
 --overwrite=yes \
 --paramfile=/u/project/cbearden/data/22q/qunex_studyfolder/sessions/specs/22q_trio_params.txt \
