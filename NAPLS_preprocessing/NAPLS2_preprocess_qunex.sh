@@ -98,7 +98,7 @@ for i in *_S*; do if [[ ! -f ${i}/images/functional/bold1_Atlas_s_hpss_res-mVWM1
 02_S0045_00
 02_S0096_00
 03_S0048_14
-03_S0055_0
+03_S0055_00
 
 # check if GSR results present
 cd /u/project/cbearden/data/NAPLS_BOLD/NAPLS2/sessions/S_sessions
