@@ -30,7 +30,7 @@ done
 # map hcp data to images directory
 /u/project/cbearden/data/scripts/charlie/22q_hoffman/hoffman_submit/hoffman_submit_qunex.sh \
 --qunex_command="map_hcp_data" \
---qunex_options=" --overwrite=yes --bolds=all --sessions=/u/project/cbearden/data/NAPLS_BOLD/NAPLS2/processing/NAPLS2_batch.txt --sessionsfolder=/u/project/cbearden/data/NAPLS_BOLD/NAPLS2/sessions/S_sessions" \
+--qunex_options=" --overwrite=yes --bolds=RESTING --sessions=/u/project/cbearden/data/NAPLS_BOLD/NAPLS2/processing/NAPLS2_batch.txt --sessionsfolder=/u/project/cbearden/data/NAPLS_BOLD/NAPLS2/sessions/S_sessions" \
 --scheduler_options="-l h_data=20G,h_rt=4:00:00,arch=intel*" \
 --array="yes" \
 --logdir="/u/project/cbearden/data/NAPLS_BOLD/NAPLS2/processing/logs/manual" \
