@@ -1,13 +1,13 @@
-# C. Schleifer 6/2/2022
-# Script to compute parcellated mean network homogeneity for parcels
-# Inputs: preprocessed BOLDs, motion scrubbing file, CAB-NP atlas cifti, subcortical structures cifti
-# Should be run on hoffman2 server due to memory and i/o constraints on local machine. Subsequent steps can be run locally (see striatum_thalamus_rsn_fc.Rmd)
+# C. Schleifer 9/14/2023
+# Script to compute parcellated network homogeneity
+# Inputs: preprocessed BOLDs, motion scrubbing file, paths and filenames
+# Should be submitted as an array on hoffman using a wrapper script to submit one job per subject (submit_network_homogeneity.sh -> run_network_homogeneity.sh -> parcellated_network_homogeneity.R)
 
 # clear environment
 rm(list = ls(all.names = TRUE))
 
 # list of packages to load
-packages <- c("ciftiTools", "dplyr", "tidyr", "magrittr", "DescTools", "parallel", "tictoc")
+packages <- c("optparse", "ciftiTools", "dplyr", "tidyr", "magrittr", "DescTools","parallel")
 
 # Install packages not yet installed
 # Note: ciftiTools install fails if R is started without enough memory
@@ -27,15 +27,44 @@ ciftiTools.setOption("wb_path", wbpath)
 hoffman <- "/u/project/cbearden/data/"
 #hoffman <- "~/Desktop/hoffman_mount/"
 
-## load parcellation data
+# get command line options
+option_list <- list(
+  make_option(c("--sessions_dir"), type="character", default=NULL, 
+              help="study directory", metavar="character"),
+  make_option(c("--sesh"), type="character", default=NULL, 
+              help="MRI ID", metavar="character"),
+  make_option(c("--after_dir"), type="character", default="/images/functional/", 
+              help="directory within session", metavar="character"),
+  make_option(c("--file_end"), type="character", default=NULL, 
+              help="file name end to look for", metavar="character"),
+  make_option(c("--overwrite"), type="character", default=TRUE, 
+              help="overwrite [T/F]", metavar="character"),
+  make_option(c("--bold_name_use"), type="character", default="resting", 
+              help="bold name to use", metavar="character")) 
+# parse options
+opt_parser <- OptionParser(option_list=option_list)
+opt <- parse_args(opt_parser)
+# set variables from options
+sesh=opt$sesh
+sessions_dir=opt$sessions_dir
+bold_name_use=opt$bold_name_use
+after_dir=opt$after_dir
+file_end=opt$file_end
+overwrite=opt$overwrite
+#test options
+#sesh="Q_0001_10152010"
+#sessions_dir="/u/project/cbearden/data/22q/qunex_studyfolder/sessions/"
+#bold_name_use="resting"
+#after_dir="/images/functional/"
+#file_end="_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii"
+#overwrite=TRUE
+
+# load parcellation data
 ji_path <- file.path(hoffman,"/22q/qunex_studyfolder/analysis/fcMRI/roi/ColeAnticevicNetPartition-master")
 ji_key <- read.table(file.path(ji_path,"/CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_parcels_LR_LabelKey.txt"),header=T)
 ji_net_keys <- ji_key[,c("NETWORKKEY","NETWORK")] %>% distinct %>% arrange(NETWORKKEY)
 xii_Ji_network <- read_cifti(file.path(ji_path,"/data/CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_netassignments_LR.dscalar.nii"), brainstructures = "all")
 xii_Ji_parcel <- read_cifti(file.path(ji_path,"/data/CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_parcels_LR.dscalar.nii"), brainstructures = "all")
-
-# read cifti with subcortical structures labeled 
-#xii_subcort_structs <- read_cifti(file.path(hoffman,"22q/qunex_studyfolder/analysis/fcMRI/roi/structures.dtseries.nii"), brainstructures = "all")
 
 # function to get mapping between boldn and run name from session_hcp.txt
 get_boldn_names <- function(sesh,sessions_dir){
@@ -200,107 +229,12 @@ main_compute_parc_NetHo <- function(sesh, sessions_dir, bold_name_use, after_dir
 }
 
 
-# function to run NetHo for all sessions matching sesh_pattern in session_dir that have the file specified by after_dir, bold_name_use, and file_end
-# sesh_pattern = "Q_[0-9]"
-run_sesh_list <- function(sessions_dir,sesh_pattern,after_dir,bold_name_use,file_end,exclude=""){
-  print("Preparing to compute NetHo for all sessions in sessions_dir with existing input data")
-  print(paste("sessions_dir =",sessions_dir))
-  print(paste("sesh_pattern =",sesh_pattern))
-  print(paste("after_dir =",after_dir))
-  print(paste("bold_name_use =",bold_name_use))
-  print(paste("file_end =",file_end))
-  
-  # get list of all sessions in sessions_dir
-  sesh_all_initial <- list.files(sessions_dir,pattern=sesh_pattern)
-  # remove excluded sessions
-  sesh_all <- setdiff(sesh_all_initial,exclude) %>% as.vector
-  print("sesh_all:")
-  print(sesh_all)
-  
-  
-  # get subset of list with movement scrubbing info available 
-  #scrub_exists_all <- lapply(sesh_all, function(s) check_mov_scrub(sesh=s,sessions_dir=sessions_dir,bold_name_use=bold_name_use)) %>% do.call(rbind,.) %>% as.data.frame
-  #print("scrub_exists_all:")
-  #print(scrub_exists_all)
-  #sesh_with_scrub <- sesh_all[which(scrub_exists_all == T)]
-  #print("Sessions with BOLD scrubbing info:")
-  #print(sesh_with_scrub)
-  #sesh_without_scrub <- sesh_all[which(scrub_exists_all == F)]
-  #print("Sessions without BOLD scrubbing info (skipping):")
-  #print(sesh_without_scrub)
-  
-  # read bold info
-  #percent_udvarsme_all <- lapply(sesh_with_scrub, function(s) get_percent_udvarsme(sesh=s,sessions_dir=sessions_dir,bold_name_use=bold_name_use)) %>% do.call(rbind,.) %>% as.data.frame
-  percent_udvarsme_all <- lapply(sesh_all, function(s) get_percent_udvarsme(sesh=s,sessions_dir=sessions_dir,bold_name_use=bold_name_use)) %>% do.call(rbind,.) %>% as.data.frame
-  
-  # get path for processed bold rest based on percent_udvarsme_all$bold_n
-  #rest_path_all <- lapply(sesh_with_scrub, function(s) get_rest_path(session=s, sessions_dir=sessions_dir, after_dir=after_dir, file_end=file_end, motion_stats=percent_udvarsme_all)) %>% do.call(rbind,.) %>% as.data.frame
-  rest_path_all <- lapply(sesh_all, function(s) get_rest_path(session=s, sessions_dir=sessions_dir, after_dir=after_dir, file_end=file_end, motion_stats=percent_udvarsme_all)) %>% do.call(rbind,.) %>% as.data.frame
-  
-  # check that input files exist
- #exists_tf <- lapply(rest_path_all$fpath,file.exists) %>% do.call(rbind,.) %>% as.data.frame
- #existing_files <- rest_path_all$fpath[which(exists_tf == T)]
- #sesh_use <- rest_path_all$sesh[which(exists_tf == T)]
- #missing_files <- rest_path_all$fpath[which(exists_tf == F)]
- #print("sessions to process:")
- #print(sesh_use)
-  
-  # calculate network and parcel RSFA for all sessions with data (sesh_use)
-  print("computing parcel NetHo")
-  #mclapply(sesh_all, function(s) main_compute_parc_NetHo(sesh=s, sessions_dir=sessions_dir, bold_name_use=bold_name_use, after_dir=after_dir, file_end=file_end), mc.preschedule=TRUE, mc.cores=8)
-  lapply(sesh_all, function(s) main_compute_parc_NetHo(sesh=s, sessions_dir=sessions_dir, bold_name_use=bold_name_use, after_dir=after_dir, file_end=file_end))
-}
+# do work
+print("Preparing to compute regional network homogeneity...")
+print(paste("sessions_dir =",sessions_dir))
+print(paste("session =",sesh))
+print(paste("after_dir =",after_dir))
+print(paste("bold_name_use =",bold_name_use))
+print(paste("file_end =",file_end))
 
-# sessions to exclude
-#exclude_sessions <- c("Q_0217_01242017","Q_0279_12132016","Q_0334_12012016")
-exclude_sessions <- NULL
-### DO WORK
-## network and parcel RSFA
-# GSR
-
-# 22qPrisma
-#run_sesh_list(sessions_dir = file.path(hoffman,"22qPrisma/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "restingAP",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii", exclude=exclude_sessions)
-
-## 22qTrio
-#run_sesh_list(sessions_dir = file.path(hoffman,"22q/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii")
-#
-## SUNY
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/SUNY/qunex_studyfolder/sessions"),  sesh_pattern = "X[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii")
-#
-## IoP
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/IoP/qunex_studyfolder/sessions"), sesh_pattern = "GQAIMS[0-9]", bold_name_use = "resting", after_dir ="/images/functional/", file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii")
-#
-## Rome
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/Rome/qunex_studyfolder/sessions"),  sesh_pattern = "[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii")
-#
-#
-### no GSR
-#
-## 22qPrisma
-#run_sesh_list(sessions_dir = file.path(hoffman,"22qPrisma/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "restingAP",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii", exclude=exclude_sessions)
-#
-## 22qTrio
-#run_sesh_list(sessions_dir = file.path(hoffman,"22q/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii")
-#
-## SUNY
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/SUNY/qunex_studyfolder/sessions"),  sesh_pattern = "X[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii")
-#
-## Rome
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/Rome/qunex_studyfolder/sessions"),  sesh_pattern = "[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii")
-#
-## IoP
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/IoP/qunex_studyfolder/sessions"), sesh_pattern = "GQAIMS[0-9]", bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii")
-
-
-# NAPLS2
-# no GSR
-run_sesh_list(sessions_dir = file.path(hoffman,"NAPLS_BOLD/NAPLS2//sessions/S_sessions"),  sesh_pattern = "[0-9]_S[0-9]",  bold_name_use = "RESTING",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii")
-# GSR
-run_sesh_list(sessions_dir = file.path(hoffman,"NAPLS_BOLD/NAPLS2//sessions/S_sessions"),  sesh_pattern = "[0-9]_S[0-9]",  bold_name_use = "RESTING",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii")
-
-
-
-
-# paste command below into hoffman terminal
-# qsub -cwd -V -o /u/project/cbearden/data/22q/qunex_studyfolder/processing/logs/manual/22q_NetHo_save_individual.$(date +%s).o -e /u/project/cbearden/data/22q/qunex_studyfolder/processing/logs/manual/22q_NetHo_save_individual.$(date +%s).e -pe shared 8 -l h_data=4G,h_rt=330:00:00,highp,arch=intel* /u/project/cbearden/data/22q/qunex_studyfolder/analysis/scripts/submit_NetHo.sh 
-# qsub -cwd -V -o /u/project/cbearden/data/22q/qunex_studyfolder/processing/logs/manual/22q_NetHo_save_individual.$(date +%s).o -e /u/project/cbearden/data/22q/qunex_studyfolder/processing/logs/manual/22q_NetHo_save_individual.$(date +%s).e  -l h_data=32G,h_rt=330:00:00,highp,arch=intel* /u/project/cbearden/data/22q/qunex_studyfolder/analysis/scripts/submit_NetHo.sh 
+main_compute_parc_NetHo(sesh=sesh, sessions_dir=sessions_dir, bold_name_use=bold_name_use, after_dir=after_dir, file_end=file_end)
