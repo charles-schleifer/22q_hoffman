@@ -37,7 +37,7 @@ option_list <- list(
               help="directory within session", metavar="character"),
   make_option(c("--file_end"), type="character", default=NULL, 
               help="file name end to look for", metavar="character"),
-  make_option(c("--overwrite"), type="character", default=TRUE, 
+  make_option(c("--overwrite"), type="character", default=FALSE, 
               help="overwrite [T/F]", metavar="character"),
   make_option(c("--bold_name_use"), type="character", default="resting", 
               help="bold name to use", metavar="character")) 
