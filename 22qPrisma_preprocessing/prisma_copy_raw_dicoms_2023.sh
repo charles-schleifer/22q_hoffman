@@ -1,9 +1,11 @@
 #!/bin/sh
 
-# script to copy all raw dicoms from raw folder to qunex inbox
+# C. Schleifer 9/2023
+# script to copy all raw dicoms from raw folder to qunex inbox as first step for preprocessing
 
 # raw study dir
 sdir="/u/project/cbearden/data/raw/22qPrisma/"
+
 # target dir
 tdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions/inbox/MR/"
 
@@ -25,7 +27,7 @@ for spath in ${sdir}/Q_*; do
     else
         echo copying from $spath
         mkdir -p ${tdir}/${sesh} 
-        # for each MRI run (note: path is specific to Bearden Lab hoffman Prisma data)
+        # for each MRI run (note: path is specific to Bearden Lab hoffman Prisma data, there are definitely better ways to find all the dcms but this works)
         for rpath in ${spath}/*Prisma*/*/BEARDEN*/*; do
             echo $rpath
             run=$(basename $rpath)
