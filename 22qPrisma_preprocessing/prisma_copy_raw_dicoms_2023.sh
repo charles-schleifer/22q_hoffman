@@ -40,13 +40,3 @@ for spath in ${sdir}/Q_*; do
     fi
 done
 
-# echo "copying from ${spath}"
-#    for rpath in ${spath}/Prisma*/*/BEARDEN*/*; do
-#		run="$(basename -- $rpath)"
-#		for dpath in ${rpath}/*; do
-#			dicom="$(basename -- $dpath)"
-#			mkdir -p ${tdir}/${sesh} 
-#			cp -v ${dpath} ${tdir}/${sesh}/${sesh}_${run}_${dicom} 
-#		done
-#	done
-#done
