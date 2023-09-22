@@ -22,8 +22,10 @@ for spath in ${sdir}/Q_*; do
         echo $sesh excluded
     else
         echo copying from $spath
-        ls $spath
-        #for rpath in ${spath}/Prisma*/*/BEARDEN*/*; do
+        for rpath in ${spath}/*Prisma*/*/BEARDEN*/*; do
+            echo $rpath
+            
+        done
     fi
 done
 
