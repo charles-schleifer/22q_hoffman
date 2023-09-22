@@ -15,17 +15,18 @@ exclude="Q_0001_02222018 Q_0250_10242017 Q_0315_02162017 Q_0356_06052019 Q_0397_
 
 # copy all raw dicoms, renaming to $sesh_$run_$dicom to avoid name conflicts
 for spath in ${sdir}/Q_*; do
-	sesh=$(basename $spath)
-  if echo $pscans | grep -q $sesh; then
-		echo $sesh already in study folder
-	elif echo $exclude | grep -q $sesh; then
-		echo $sesh excluded
- 	else
-		echo copying from $spath
-		ls $spath
-		#for rpath in ${spath}/Prisma*/*/BEARDEN*/*; do
-	fi
+    sesh=$(basename $spath)
+    if echo $pscans | grep -q $sesh; then
+        echo $sesh already in study folder
+    elif echo $exclude | grep -q $sesh; then
+        echo $sesh excluded
+    else
+        echo copying from $spath
+        ls $spath
+        #for rpath in ${spath}/Prisma*/*/BEARDEN*/*; do
+    fi
 done
+
 # echo "copying from ${spath}"
 #    for rpath in ${spath}/Prisma*/*/BEARDEN*/*; do
 #		run="$(basename -- $rpath)"
