@@ -15,6 +15,7 @@ exclude="Q_0001_02222018 Q_0250_10242017 Q_0315_02162017 Q_0356_06052019 Q_0397_
 
 # copy all raw dicoms, renaming to $sesh_$run_$dicom to avoid name conflicts
 for spath in ${sdir}/Q_*; do
+    # get session name as the last item in the session path
     sesh=$(basename $spath)
     # skip if in pscans or excluded scans
     if echo $pscans | grep -q $sesh; then
