@@ -8,7 +8,8 @@
 #####################################################################
 
 ## organize raw dicoms
-qsub -cwd -V -l h_data=8G,h_rt=24:00:00 /u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/scripts/prisma_copy_raw_dicoms_2023.sh
+logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual"
+qsub -cwd -V -o ${logdir}/dicom_copy.o -e ${logdir}/dicom_copy.e -l h_data=8G,h_rt=24:00:00 /u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/scripts/prisma_copy_raw_dicoms_2023.sh
 
 ## import DICOMs 
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
