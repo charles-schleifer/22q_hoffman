@@ -7,7 +7,9 @@
 ### organize and prepare data
 #####################################################################
 
-## organize raw dicoms
+## organize raw dicoms into inbox/MR
+# automatically copies all scans not already in sessions folder or included list of excluded sessions
+# note: if the paths to the raw data change substantially you will need to edit this script
 logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual"
 qsub -cwd -V -o ${logdir}/dicom_copy.o -e ${logdir}/dicom_copy.e -l h_data=8G,h_rt=24:00:00 /u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/scripts/prisma_copy_raw_dicoms_2023.sh
 
