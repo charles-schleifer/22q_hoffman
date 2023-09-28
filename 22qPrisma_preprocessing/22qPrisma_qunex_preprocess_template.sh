@@ -32,9 +32,9 @@ qsub -cwd -V -o ${logdir}/dicom_copy.o -e ${logdir}/dicom_copy.e -l h_data=8G,h_
 
 # run script to comment out second T1w and T2w (each session has two copies of each, with and without intensity normalization)
 # same script fixes subject header in session_hcp.txt
-# TO DO: paste in list of sessions
+# TO DO: paste in list of sessions separated by spaces
 sessions=" "
-bash /u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/scripts/edit_session_hcp.sh --sessions=$sessions --seshdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions/" 
+bash /u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/scripts/edit_session_hcp.sh --sessions="${sessions}" --seshdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions/" 
 
 ## Setup HCP
 # TO DO: paste in list of sessions (separated by spaces) for all following commands
