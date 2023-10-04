@@ -26,4 +26,8 @@ most analyses are R scripts, accompanied by one or two other scripts to submit a
 5. Brain signal variability (RSFA)
    * submit_voxel_RSFA.sh --> run_voxel_RSFA.sh --> 22q_voxel_RSFA_CIFTI.R
      * computes resting state fluctuation amplitude as the average temporal standard deviation of fMRI signal in each parcel
+    
+6. QC-FC
+   * submit_qcfc.sh --> qcfc_hoffman.R
+     * correlates framewise displacement and functional connectivity   
 
