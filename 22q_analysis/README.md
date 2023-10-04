@@ -2,8 +2,8 @@
 most analyses are R scripts, accompanied by one or two other scripts to submit and run jobs on the cluster
 
 1. Thalamic cortical functional network connectivity
-   * submit_extract_tc_individual.sh --> run_extract_tc_individual.sh --> 22q_multisite_networkTC_extract_ROIs.R
-   *
+  * submit_extract_tc_individual.sh --> run_extract_tc_individual.sh --> 22q_multisite_networkTC_extract_ROIs.R
+  *
 
 3. Thalamic cortical anatomical network connectivity
   * submit_thal_fs_cifti.sh --> thalamus_freesurfer_cifti.sh
