@@ -6,7 +6,7 @@ module load R
 # SUNY
 logdir="/u/project/cbearden/data/Enigma/SUNY/qunex_studyfolder/processing/logs/manual/"
 sdir="/u/project/cbearden/data/Enigma/SUNY/qunex_studyfolder/sessions/"
-for s in ${sdir}/X[0-9]; do
+for s in ${sdir}/X*; do
 	sesh=$(basename $s)
 	echo $sesh
 	qsub -cwd -V -o ${logdir}/${sesh}_NetHo_noGSR.$(date +%s).o -e ${logdir}/${sesh}_NetHo_noGSR.$(date +%s).e -l h_data=20G,h_rt=10:00:00  /u/project/cbearden/data/22q/qunex_studyfolder/analysis/scripts/run_network_homogeneity.sh --sessions_dir=${sdir} --sesh=${sesh} --file_end="_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii" --bold_name_use="resting" 
