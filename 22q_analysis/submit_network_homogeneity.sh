@@ -3,6 +3,20 @@
 source /u/local/Modules/default/init/modules.sh
 module load R 
 
+# Rome
+logdir="/u/project/cbearden/data/Enigma/Rome/qunex_studyfolder/processing/logs/manual/"
+sdir="/u/project/cbearden/data/Enigma/Rome/qunex_studyfolder/sessions/"
+for s in ${sdir}/*[0-9]; do
+	sesh=$(basename $s)
+	echo $sesh
+	qsub -cwd -V -o ${logdir}/${sesh}_NetHo_noGSR.$(date +%s).o -e ${logdir}/${sesh}_NetHo_noGSR.$(date +%s).e -l h_data=20G,h_rt=10:00:00  /u/project/cbearden/data/22q/qunex_studyfolder/analysis/scripts/run_network_homogeneity.sh --sessions_dir=${sdir} --sesh=${sesh} --file_end="_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii" --bold_name_use="resting" 
+	qsub -cwd -V -o ${logdir}/${sesh}_NetHo_GSR.$(date +%s).o -e ${logdir}/${sesh}_NetHo_GSR.$(date +%s).e -l h_data=20G,h_rt=10:00:00  /u/project/cbearden/data/22q/qunex_studyfolder/analysis/scripts/run_network_homogeneity.sh --sessions_dir=${sdir} --sesh=${sesh} --file_end="_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii" --bold_name_use="resting" 
+done
+
+
+#### won't run below this line
+exit
+
 # 22qPrisma
 logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual/"
 sdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions/"
