@@ -11,8 +11,8 @@ sessions="Q_0391_09252018 Q_0402_01112019 Q_0414_07172019 Q_0415_07292019 Q_0429
 for sesh in $sessions; do
 	#sesh=$(basename $s)
 	echo $sesh
-	qsub -cwd -V -o ${logdir}/${sesh}_NetHo_noGSR.$(date +%s).o -e ${logdir}/${sesh}_NetHo_noGSR.$(date +%s).e -l h_data=16G,h_rt=10:00:00  /u/project/cbearden/data/22q/qunex_studyfolder/analysis/scripts/run_network_homogeneity.sh --sessions_dir=${sdir} --sesh=${sesh} --file_end="_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii" --bold_name_use="restingAP" 
-	#qsub -cwd -V -o ${logdir}/${sesh}_NetHo_GSR.$(date +%s).o -e ${logdir}/${sesh}_NetHo_GSR.$(date +%s).e -l h_data=16G,h_rt=10:00:00  /u/project/cbearden/data/22q/qunex_studyfolder/analysis/scripts/run_network_homogeneity.sh --sessions_dir=${sdir} --sesh=${sesh} --file_end="_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii" --bold_name_use="restingAP" 
+	qsub -cwd -V -o ${logdir}/${sesh}_NetHo_noGSR.$(date +%s).o -e ${logdir}/${sesh}_NetHo_noGSR.$(date +%s).e -l h_data=20G,h_rt=10:00:00  /u/project/cbearden/data/22q/qunex_studyfolder/analysis/scripts/run_network_homogeneity.sh --sessions_dir=${sdir} --sesh=${sesh} --file_end="_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii" --bold_name_use="restingAP" 
+	#qsub -cwd -V -o ${logdir}/${sesh}_NetHo_GSR.$(date +%s).o -e ${logdir}/${sesh}_NetHo_GSR.$(date +%s).e -l h_data=20G,h_rt=10:00:00  /u/project/cbearden/data/22q/qunex_studyfolder/analysis/scripts/run_network_homogeneity.sh --sessions_dir=${sdir} --sesh=${sesh} --file_end="_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii" --bold_name_use="restingAP" 
 done
 
 
