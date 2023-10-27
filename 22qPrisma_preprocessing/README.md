@@ -6,7 +6,7 @@
   * Example commands to preprocess T1w T2w and multi-band BOLD from raw DICOMs to nuisance-regressed and motion-corrected NIFTI/CIFTI images are in [22qPrisma_qunex_preprocess_template.sh](https://github.com/charles-schleifer/22q_hoffman/blob/main/22qPrisma_preprocessing/22qPrisma_qunex_preprocess_template.sh)
 
 # Preprocessing steps
-### Notes: 
+#### Notes: 
 * preprocessing consists of a set of functions that are run sequentially on the data, each requiring the outputs of the previous step
 * steps are outlined below
 * details for each command can be found in the [online documentation](https://www.frontiersin.org/articles/10.3389/fninf.2023.1104508/full) or by running an interactive QuNex container and typing the desired function name into the command line
@@ -31,8 +31,8 @@
  4. processing BOLD image in volume space with `hcp_fmri_volume`
  5. transformation of fMRI results to CIFTI space with `hcp_fmri_surface`
 
-### Notes: 
-* these steps may take several hours each to complete (freesurfer is the slowest)
+#### Notes: 
+* these steps may take several hours each to complete (freesurfer may take upwards of 10h)
 * some logs will be output in your specified --logdir, but the most useful logs are in qunex_studyfolder/processing/logs/comlogs
   * these comlogs will show you if each command for each session is running (name will start with "tmp"), done, or exited in error, and the log contents will give more information  
 
@@ -50,7 +50,7 @@
    * frames flagged for motion are still included in this image.
      * if doing further analysis outside of QuNex (e.g. with ciftiTools), you will need to read the relevant movement file from images/functional/movement/boldn.scrub to exclude frames flagged for motion (i.e., frames where the column "use"==0)
 
-### Notes: 
+#### Notes: 
 * these steps run much more quickly than the HCP steps
 * outputs are in the images directory
 * logs are in the same format as prior steps
