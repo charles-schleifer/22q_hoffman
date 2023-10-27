@@ -47,7 +47,7 @@
 * these steps run much more quickly than the HCP steps
 * outputs are in the images directory
 * logs are in the same format as prior steps
-* "--bolds" string specifies bold names (from session_hcp.txt) to process, separated by commas
+* --bolds string specifies bold names (from session_hcp.txt) to process, separated by commas
 * --bold_actions "s"=spatial smoothing, "h"=highpass filter, "r"=nuisance regression, "c"= save betas, "l"=lowpass  
 * --bold_nuisance "m"=movement, "V"=ventricles, "WM"=white matter, "WB"=whole brain (i.e., global signal regression, include with caution), "1d"=first derivatives of previous regressors
   * these options would lead to a BOLD output that is smoothed, bandpass filtered, and nuisance regressed based on movement, ventricles, white matter, and global signal.
