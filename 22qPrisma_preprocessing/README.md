@@ -7,7 +7,8 @@
 
 # Preprocessing steps
 A) prepare raw data and batch files
-1. 
+ 1. copy dicoms from raw directory to qunex_studyfolder/sessions/inbox/MR
+ 2. 
 
 B) HCP minimal preprocessing steps
 
