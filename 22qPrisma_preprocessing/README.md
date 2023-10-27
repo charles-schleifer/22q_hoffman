@@ -7,9 +7,8 @@
 
 # Preprocessing steps
 A) prepare raw data and batch files
- 1. copy dicoms from raw directory to qunex_studyfolder/sessions/inbox/MR
-  * test 
- 2. 
+ 1. copy dicoms from raw directory to qunex_studyfolder/sessions/inbox/MR with a script like [prisma_copy_raw_dicoms_2023.sh](https://github.com/charles-schleifer/22q_hoffman/blob/main/22qPrisma_preprocessing/prisma_copy_raw_dicoms_2023.sh) 
+ 2. create folders for each new session in qunex_studyfolder/sessions/ and convert DICOMS to NIFTI with `import_dicom`
 
 B) HCP minimal preprocessing steps
 
