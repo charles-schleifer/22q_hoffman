@@ -144,7 +144,7 @@ get_mov_scrub <- function(sesh,sessions_dir,bold_name_use){
 }
 
 # function to scrub bad frames from bold data, dropping first n frames 1:drop_first
-do_bold_scrub <- function(mov,xii,metric,drop_first){
+do_bold_scrub <- function(mov,xii,metric,drop_first=5){
   scrub_dat <- mov[,metric]
   scrub_dat[c(1:drop_first)] <- 1
   keep_frames <- which(scrub_dat == 0)
