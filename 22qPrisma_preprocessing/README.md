@@ -7,7 +7,7 @@
 
 # Preprocessing steps
 Notes: 
-* preprocessing consists of a set of functions that need to be run sequentially on the data, each requiring the outputs of the previous step
+* preprocessing consists of a set of functions that are run sequentially on the data, each requiring the outputs of the previous step
 * steps are outlined below
 * details for each command can be found in the [online documentation](https://www.frontiersin.org/articles/10.3389/fninf.2023.1104508/full) or by running an interactive QuNex container and typing the desired function name into the command line
 * the full commands for submitting each step on the hoffman cluster are here: [22qPrisma_qunex_preprocess_template.sh](https://github.com/charles-schleifer/22q_hoffman/blob/main/22qPrisma_preprocessing/22qPrisma_qunex_preprocess_template.sh)
