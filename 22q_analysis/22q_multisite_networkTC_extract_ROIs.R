@@ -9,13 +9,13 @@ rm(list = ls(all.names = TRUE))
 # list of packages to load
 packages <- c("optparse","ciftiTools", "dplyr", "tidyr", "magrittr", "DescTools","parallel")
 
-# Install packages not yet installed
-# Note: ciftiTools install fails if R is started without enough memory
+# install packages not yet installed
+# note: ciftiTools install fails if R is started without enough memory
 installed_packages <- packages %in% rownames(installed.packages())
 # comment out line below to skip install
 if (any(installed_packages == FALSE)) {install.packages(packages[!installed_packages])}
 
-# Packages loading
+# load packages
 invisible(lapply(packages, library, character.only = TRUE))
 
 # set up workbench
@@ -50,7 +50,7 @@ bold_name_use=opt$bold_name_use
 after_dir=opt$after_dir
 file_end=opt$file_end
 
-## load parcellation data
+# load parcellation data
 ji_path <- file.path(hoffman,"/22q/qunex_studyfolder/analysis/fcMRI/roi/ColeAnticevicNetPartition-master")
 ji_key <- read.table(file.path(ji_path,"/CortexSubcortex_ColeAnticevic_NetPartition_wSubcorGSR_parcels_LR_LabelKey.txt"),header=T)
 ji_net_keys <- ji_key[,c("NETWORKKEY","NETWORK")] %>% distinct %>% arrange(NETWORKKEY)
@@ -210,7 +210,7 @@ roi_means <- function(bold_mat, roi_name){
   return(bold_df)
 }
 
-## wrapper for above functions to compute motion-scrubbed WITHIN NETWORK thalamic-cortical FC for single subject
+# wrapper for above functions to compute motion-scrubbed WITHIN NETWORK thalamic-cortical FC for single subject
 main_extract_net_TC <- function(sesh, sessions_dir, bold_name_use, after_dir, file_end){
   print(paste("STARTING:", sesh, sep=" "))
   
@@ -286,7 +286,7 @@ main_extract_net_TC <- function(sesh, sessions_dir, bold_name_use, after_dir, fi
   #write.table(tc_out, file="~/Desktop/test.csv", col.names=T, row.names=F, quote=F, na="NA", sep=",", eol = "\n")
 }
 
-#### DO WORK
+## DO WORK
 main_extract_net_TC(sessions_dir=sessions_dir,  sesh=sesh,  bold_name_use=bold_name_use,  after_dir=after_dir,  file_end=file_end)
 
 
