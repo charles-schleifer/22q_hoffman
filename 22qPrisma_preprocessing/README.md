@@ -58,7 +58,7 @@
       * the first string in the name "boldn" corresponds to the bold number in the session_hcp.txt file
        * in a study, it may be the case that bolds are run in different orders by subject and bold1 is not always the resting state bold or whichever you are interested in, and you may need to read the session_hcp.txt files during your analysis to get the correct boldn for each session (see get_boldn_names function in [22q_multisite_networkTC_extract_ROIs.R](https://github.com/charles-schleifer/22q_hoffman/blob/main/22q_analysis/22q_multisite_networkTC_extract_ROIs.R) for an example  
  * *important*: frames flagged for motion are still included in this image, and will be ignored by QuNex functional connectivity commands but not other packages
-    * if doing further analysis outside of QuNex (e.g., with ciftiTools), you will need to read the relevant movement file from images/functional/movement/boldn.scrub to exclude frames flagged for motion (i.e., frames where the column "use"==0; see do_bold_scrub function in [22q_multisite_networkTC_extract_ROIs.R](https://github.com/charles-schleifer/22q_hoffman/blob/main/22q_analysis/22q_multisite_networkTC_extract_ROIs.R) 
+    * if doing further analysis outside of QuNex (e.g., with ciftiTools), you will need to read the relevant movement file from images/functional/movement/boldn.scrub to exclude frames flagged for motion (see do_bold_scrub function in [22q_multisite_networkTC_extract_ROIs.R](https://github.com/charles-schleifer/22q_hoffman/blob/main/22q_analysis/22q_multisite_networkTC_extract_ROIs.R) 
 
 # Troubleshooting
 * check your jobs on hoffman with `qstat -u your_username`
