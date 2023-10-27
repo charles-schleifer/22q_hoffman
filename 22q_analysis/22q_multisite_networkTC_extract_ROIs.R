@@ -7,7 +7,7 @@
 rm(list = ls(all.names = TRUE))
 
 # list of packages to load
-packages <- c("optparse","ciftiTools", "dplyr", "tidyr", "magrittr", "DescTools","parallel")
+packages <- c("optparse","ciftiTools", "dplyr", "tidyr", "DescTools")
 
 # install packages not yet installed
 # note: ciftiTools install fails if R is started without enough memory
