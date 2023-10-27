@@ -1,7 +1,7 @@
 # C. Schleifer 8/1/2023
 # Script to extract BOLD time series from thalamic and cortical networks and compute all correlations
 # Inputs: preprocessed BOLDs, motion scrubbing file, CAB-NP atlas cifti, subcortical structures cifti
-# Should be run on hoffman2 server due to memory and i/o constraints on local machine. Subsequent steps can be run locally (see striatum_thalamus_rsn_fc.Rmd)
+# Should be run on hoffman2 server due to memory and i/o constraints on local machine. Subsequent steps can be run locally 
 
 # clear environment
 rm(list = ls(all.names = TRUE))
@@ -70,7 +70,6 @@ mask_values <- function(value,keep_vals){
     return(as.numeric(0))  
   }
 }
-
 
 # create cortex mask (cortex=1, subcort=0)
 cort_mask <- xii_Ji_network
@@ -211,7 +210,6 @@ roi_means <- function(bold_mat, roi_name){
   return(bold_df)
 }
 
-
 ## wrapper for above functions to compute motion-scrubbed WITHIN NETWORK thalamic-cortical FC for single subject
 main_extract_net_TC <- function(sesh, sessions_dir, bold_name_use, after_dir, file_end){
   print(paste("STARTING:", sesh, sep=" "))
@@ -260,24 +258,11 @@ main_extract_net_TC <- function(sesh, sessions_dir, bold_name_use, after_dir, fi
   
   # thal networks to use for connectivity
   thal_nets <- c("Visual1","Visual2","Somatomotor","Cingulo_Opercular","Dorsal_Attention","Frontoparietal","Auditory","Default","Posterior_Multimodal")
+ 
   # placeholder data frame for TCC matrix
-#  tc_mat <- matrix(data=NA, nrow=length(thal_nets), ncol=length(thal_nets)) %>% as.data.frame
-#  colnames(tc_mat) <- paste0("Cortical_",thal_nets)
-#  rownames(tc_mat) <- paste0("Thalamic_",thal_nets)
-#  # TCC between every pair of networks
-#  for(tnet in thal_nets){
-#    for(cnet in thal_nets){
-#      # get thal and cortex time series for chosen networks
-#      tseries <- as.vector(thal_means[,tnet])
-#      cseries <- as.vector(cort_means[,cnet])
-#      # get connectivity
-#      fc <- FisherZ(as.numeric(cor(x=tseries, y=cseries, method="pearson", use="na.or.complete")))
-#      # save in data frame
-#      tc_mat[paste0("Thalamic_",tnet),paste0("Cortical_",cnet)] <- fc
-#    }
-#  }
   nastring <- rep(NA, times=length(thal_nets)^2)
   tc_out <- data.frame(Thalamus=nastring, Cortex=nastring, pearson_r_Fz=nastring)
+  
   # TCC between every pair of networks
   i=1
   for(tnet in thal_nets){
@@ -299,84 +284,10 @@ main_extract_net_TC <- function(sesh, sessions_dir, bold_name_use, after_dir, fi
   print(paste("...saving TCC result to:",out_path_tc,sep=" "))
   write.table(tc_out, file=out_path_tc, col.names=T, row.names=F, quote=F, na="NA", sep=",", eol = "\n")
   #write.table(tc_out, file="~/Desktop/test.csv", col.names=T, row.names=F, quote=F, na="NA", sep=",", eol = "\n")
-  
 }
 
-
-
-
 #### DO WORK
-
 main_extract_net_TC(sessions_dir=sessions_dir,  sesh=sesh,  bold_name_use=bold_name_use,  after_dir=after_dir,  file_end=file_end)
-
-
-# 22qTrio
-#run_sesh_list(sessions_dir = file.path(hoffman,"22q/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii")
-
-# 22qPrisma
-#run_sesh_list(sessions_dir = file.path(hoffman,"22qPrisma/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "restingAP",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii", exclude=exclude_sessions)
-
-# SUNY
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/SUNY/qunex_studyfolder/sessions"),  sesh_pattern = "X[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii")
-
-# IoP
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/IoP/qunex_studyfolder/sessions"), sesh_pattern = "GQAIMS[0-9]", bold_name_use = "resting", after_dir ="/images/functional/", file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii")
-
-# Rome
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/Rome/qunex_studyfolder/sessions"),  sesh_pattern = "[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d_lpss.dtseries.nii")
-
-
-### no GSR
-# 22qTrio
-#run_sesh_list(sessions_dir = file.path(hoffman,"22q/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii")
-
-# 22qPrisma
-#run_sesh_list(sessions_dir = file.path(hoffman,"22qPrisma/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "restingAP",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii", exclude=exclude_sessions)
-
-# SUNY
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/SUNY/qunex_studyfolder/sessions"),  sesh_pattern = "X[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii")
-
-# IoP
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/IoP/qunex_studyfolder/sessions"), sesh_pattern = "GQAIMS[0-9]", bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii")
-
-# Rome
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/Rome/qunex_studyfolder/sessions"),  sesh_pattern = "[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d_lpss.dtseries.nii")
-
-
-## GSR, no lpss
-# 22qTrio
-#run_sesh_list(sessions_dir = file.path(hoffman,"22q/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d.dtseries.nii")
-
-# 22qPrisma
-#run_sesh_list(sessions_dir = file.path(hoffman,"22qPrisma/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "restingAP",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d.dtseries.nii", exclude=exclude_sessions)
-
-# SUNY
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/SUNY/qunex_studyfolder/sessions"),  sesh_pattern = "X[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d.dtseries.nii")
-
-# IoP
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/IoP/qunex_studyfolder/sessions"), sesh_pattern = "GQAIMS[0-9]", bold_name_use = "resting", after_dir ="/images/functional/", file_end = "_Atlas_s_hpss_res-mVWMWB1d.dtseries.nii")
-
-# Rome
-#run_sesh_list(sessions_dir = file.path(hoffman,"Enigma/Rome/qunex_studyfolder/sessions"),  sesh_pattern = "[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWMWB1d.dtseries.nii")
-
-
-## no GSR, no lpss
-# 22qTrio
-#run_sesh_list(sessions_dir = file.path(hoffman,"22q/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d.dtseries.nii")
-
-# 22qPrisma
-#run_sesh_list(sessions_dir = file.path(hoffman,"22qPrisma/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "restingAP",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss_res-mVWM1d.dtseries.nii", exclude=exclude_sessions)
-
-
-
-
-## no nuisance or lpss
-# 22qTrio
-#run_sesh_list(sessions_dir = file.path(hoffman,"22q/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "resting",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss.dtseries.nii")
-
-# 22qPrisma
-#run_sesh_list(sessions_dir = file.path(hoffman,"22qPrisma/qunex_studyfolder/sessions"),  sesh_pattern = "Q_[0-9]",  bold_name_use = "restingAP",  after_dir ="/images/functional/",  file_end = "_Atlas_s_hpss.dtseries.nii", exclude=exclude_sessions)
-
 
 
 
