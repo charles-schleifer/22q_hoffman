@@ -7,6 +7,7 @@
 
 # Preprocessing steps
 A) prepare raw data and batch files
+1. 
 
 B) HCP minimal preprocessing steps
 
