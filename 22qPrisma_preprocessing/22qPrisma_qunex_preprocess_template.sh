@@ -192,7 +192,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="map_hcp_data" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_no_t2_2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -200,7 +200,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="map_hcp_data" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_new2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -210,7 +210,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="create_bold_brain_masks" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_no_t2_2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -218,7 +218,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="create_bold_brain_masks" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_new2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -228,7 +228,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="compute_bold_stats" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_no_t2_2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -236,7 +236,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="compute_bold_stats" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_new2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -246,7 +246,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="create_stats_report" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_no_t2_2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -254,7 +254,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="create_stats_report" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_new2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -264,7 +264,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="extract_nuisance_signal" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_no_t2_2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -272,7 +272,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="extract_nuisance_signal" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_new2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=1:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=1:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -282,7 +282,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="preprocess_bold" \
 --qunex_options="--overwrite=no --bolds=restingAP,restingPA --bold_actions=s,h,r,c,l --bold_nuisance=m,V,WM,1d --image_target=dtseries --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_no_t2_2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=4:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=4:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -290,7 +290,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="preprocess_bold" \
 --qunex_options="--overwrite=no --bolds=restingAP,restingPA --bold_actions=s,h,r,c,l --bold_nuisance=m,V,WM,1d --image_target=dtseries --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_new2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=4:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=4:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -300,7 +300,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="preprocess_bold" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --bold_actions=s,h,r,c,l --bold_nuisance=m,V,WM,WB,1d --image_target=dtseries --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_no_t2_2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=4:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=4:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
@@ -308,7 +308,7 @@ for i in $sessions;do echo ${i};cat ${i}/session_hcp.txt; for k in /u/project/cb
 /u/project/cbearden/data/scripts/tools/qunex_bin/hoffman_submit_qunex.sh \
 --qunex_command="preprocess_bold" \
 --qunex_options="--overwrite=yes --bolds=restingAP,restingPA --bold_actions=s,h,r,c,l --bold_nuisance=m,V,WM,WB,1d --image_target=dtseries --sessions=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/22qPrisma_batch_new2023.txt --sessionsfolder=/u/project/cbearden/data/22qPrisma/qunex_studyfolder/sessions" \
---scheduler_options="-l h_data=20G,h_rt=4:00:00,arch=intel*" \
+--scheduler_options="-l h_data=32G,h_rt=4:00:00,arch=intel*" \
 --logdir="/u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/manual" \
 --array="yes" \
 --sessions=" "
