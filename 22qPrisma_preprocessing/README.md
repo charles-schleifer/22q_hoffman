@@ -6,7 +6,7 @@
   * Example commands to preprocess T1w T2w and multi-band BOLD from raw DICOMs to nuisance-regressed and motion-corrected NIFTI/CIFTI images are in [22qPrisma_qunex_preprocess_template.sh](https://github.com/charles-schleifer/22q_hoffman/blob/main/22qPrisma_preprocessing/22qPrisma_qunex_preprocess_template.sh)
 
 # Preprocessing steps
-Notes: 
+### Notes: 
 * preprocessing consists of a set of functions that are run sequentially on the data, each requiring the outputs of the previous step
 * steps are outlined below
 * details for each command can be found in the [online documentation](https://www.frontiersin.org/articles/10.3389/fninf.2023.1104508/full) or by running an interactive QuNex container and typing the desired function name into the command line
@@ -25,23 +25,18 @@ Notes:
     * notes: 1) unlike other hoffman_submit_qunex commands, list all sessions after "--sessions=" *within* the "--qunex_options" string 2) make a separate batch file for sessions missing T2w scans as these require different parameters.
 
 ## B) HCP minimal preprocessing steps
-Notes: 
-* these steps may take several hours each to complete (freesurfer is the slowest)
-* some logs will be output in your specified --logdir, but the most useful logs are in qunex_studyfolder/processing/logs/comlogs
-  * these comlogs will show you if each command for each session is running (name will start with "tmp"), done, or exited in error, and the log contents will give more information  
-
  1. initial structural image processing with `hcp_pre_freesurfer`
  2. anatomical segmentation with `hcp_freesurfer`
  3. creation of CIFTI image with `hcp_post_freesurfer`
  4. processing BOLD image in volume space with `hcp_fmri_volume`
  5. transformation of fMRI results to CIFTI space with `hcp_fmri_surface`
 
+### Notes: 
+* these steps may take several hours each to complete (freesurfer is the slowest)
+* some logs will be output in your specified --logdir, but the most useful logs are in qunex_studyfolder/processing/logs/comlogs
+  * these comlogs will show you if each command for each session is running (name will start with "tmp"), done, or exited in error, and the log contents will give more information  
+
 ## C) BOLD post-processing
-Notes: 
-* these steps run much more quickly than the HCP steps
-* outputs are in the images directory
-* logs are in the same format as prior steps
-* "--bolds" string specifies bold names (from session_hcp.txt) to process, separated by commas
 
 1. map minimally preprocessed results to images directory with `map_hcp_data`
 2. create brain masks with `create_bold_brain_masks`
@@ -53,4 +48,10 @@ Notes:
    * --bold_nuisance "m"=movement, "V"=ventricles, "WM"=white matter, "WB"=whole brain (i.e., global signal regression, include with caution), "1d"=first derivatives of previous regressors
    * these options would lead to a BOLD output that is smoothed, bandpass filtered, and nuisance regressed based on movement, ventricles, white matter, and global signal.
    * frames flagged for motion are still included in this image.
-     * if doing further analysis outside of QuNex (e.g. with ciftiTools), you will need to read the relevant movement file from images/functional/movement/boldn.scrub to exclude frames flagged for motion (i.e., frames where the column "use"==0)  
+     * if doing further analysis outside of QuNex (e.g. with ciftiTools), you will need to read the relevant movement file from images/functional/movement/boldn.scrub to exclude frames flagged for motion (i.e., frames where the column "use"==0)
+
+### Notes: 
+* these steps run much more quickly than the HCP steps
+* outputs are in the images directory
+* logs are in the same format as prior steps
+* "--bolds" string specifies bold names (from session_hcp.txt) to process, separated by commas
