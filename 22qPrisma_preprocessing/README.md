@@ -12,7 +12,7 @@ Notes:
 * details for each command can be found in the [online documentation](https://www.frontiersin.org/articles/10.3389/fninf.2023.1104508/full) or by running an interactive QuNex container and typing the desired function name into the command line
 * the full commands for submitting each step on the hoffman cluster are here: [22qPrisma_qunex_preprocess_template.sh](https://github.com/charles-schleifer/22q_hoffman/blob/main/22qPrisma_preprocessing/22qPrisma_qunex_preprocess_template.sh)
 
-A) prepare raw data and batch files
+## A) prepare raw data and batch files
  1. copy dicoms from raw directory to qunex_studyfolder/sessions/inbox/MR with a script like [prisma_copy_raw_dicoms_2023.sh](https://github.com/charles-schleifer/22q_hoffman/blob/main/22qPrisma_preprocessing/prisma_copy_raw_dicoms_2023.sh) 
     * notes: if the path to the raw data changes you will need to update this script
  2. create folders for each new session in qunex_studyfolder/sessions/ and convert DICOMS to NIFTI with `import_dicom`
@@ -24,7 +24,7 @@ A) prepare raw data and batch files
  6. create a batch file that concatenates your study parameters with all your session_hcp.txt files with `create_batch`
     * notes: 1) unlike other hoffman_submit_qunex commands, list all sessions after "--sessions=" *within* the "--qunex_options" string 2) make a separate batch file for sessions missing T2w scans as these require different parameters.
 
-B) HCP minimal preprocessing steps
+## B) HCP minimal preprocessing steps
 Notes: 
 * these steps may take several hours each to complete (freesurfer is the slowest)
 * some logs will be output in your specified --logdir, but the most useful logs are in qunex_studyfolder/processing/logs/comlogs
@@ -36,7 +36,7 @@ Notes:
  4. processing BOLD image in volume space with `hcp_fmri_volume`
  5. transformation of fMRI results to CIFTI space with `hcp_fmri_surface`
 
-C) BOLD post-processing
+## C) BOLD post-processing
 Notes: 
 * these steps run much more quickly than the HCP steps
 * outputs are in the images directory
