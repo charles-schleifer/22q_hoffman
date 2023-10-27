@@ -58,7 +58,7 @@
 * check your jobs on hoffman with `qstat -u your_username`
   * state "qw" means queued, "r" means running
 * once your job is done running, check the qunex_studyfolder/processing/logs/comlogs
-  * you can filter for only your files with ls -ltr /u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/comlogs | grep your_username  
+  * you can filter for only your files with `ls -ltr /u/project/cbearden/data/22qPrisma/qunex_studyfolder/processing/logs/comlogs | grep your_username`  
   * these comlogs will show you if each command for each session is running (name will start with "tmp"), "done", or exited in "error", and the log contents will give more information
   * if your command started to run but didn't finish (e.g., you don't have any running jobs but in your comlogs folder the relevant logs start with "tmp" and not "done") try resubmitting with different --qunex_options, you may require more memory or time
 * if your job is done, run the next step
