@@ -15,7 +15,7 @@
   * check your jobs on hoffman with `qstat -u username`  
   * some logs will be output in your specified --logdir, but for most steps the most useful logs are in qunex_studyfolder/processing/logs/comlogs
     * these comlogs will show you if each command for each session is running (name will start with "tmp"), done, or exited in error, and the log contents will give more information
-  * if your command started to run but didn't finish (e.g., you don't have any running jobs but in your comlogs folder the relevant logs start with "tmp" and not "done") check your --qunex_options, you may require more memory or time
+  * if your command started to run but didn't finish (e.g., you don't have any running jobs but in your comlogs folder the relevant logs start with "tmp" and not "done") try resubmitting with different --qunex_options, you may require more memory or time
 
 ## A) prepare raw data and batch files
  1. copy dicoms from raw directory to qunex_studyfolder/sessions/inbox/MR with a script like [prisma_copy_raw_dicoms_2023.sh](https://github.com/charles-schleifer/22q_hoffman/blob/main/22qPrisma_preprocessing/prisma_copy_raw_dicoms_2023.sh) 
