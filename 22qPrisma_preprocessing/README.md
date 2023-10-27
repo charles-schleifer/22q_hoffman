@@ -62,7 +62,7 @@
   * these comlogs will show you if each command for each session is running (name will start with "tmp"), "done", or exited in "error", and the log contents will give more information
   * if your command started to run but didn't finish (e.g., you don't have any running jobs but in your comlogs folder the relevant logs start with "tmp" and not "done") try resubmitting with different --qunex_options, you may require more memory or time
 * if your job is done, run the next step
-* if there is an error for a specific session, read the error message in comlogs, and the relevant logfile in "--logdir" (this log is messier but sometimes has useful info)
+* if there is an error for a specific session, read the error message in comlogs, and the relevant logfile in "--logdir" (this log is messier but sometimes has useful info, .o files have output messages and .e files have error messages)
 * first step for a failed session is to check the session_hcp.txt file
   * did it fail because the data don't exist (e.g. only localizers and fieldmaps were collected but no T1w etc.)? if so, move the data from qunex_studyfolder/sessions/ to a descriptively named folder in qunex_studyfolder/sessions/unused_sessions/ such as the BOLD_missing directory
   * if there are multiple copies of the same structural image type (e.g., two T1w in session_hcp.txt) ensure that only one remains without a "#" before it in the file and that the remaining line corresponds to a high quality NIFTI (can use a viewer like MRIcron or FSLeyes to look at the image in the nii directory, number names correspond to left column numbers in session_hcp.txt). If after visual inspection there are no high quality T1w images, move the session folder to qunex_studyfolder/sessions/unused_sessions/T1_bad
