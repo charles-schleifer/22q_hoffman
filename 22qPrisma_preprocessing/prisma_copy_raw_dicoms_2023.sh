@@ -28,7 +28,7 @@ for spath in ${sdir}/Q_*; do
         echo copying from $spath
         mkdir -p ${tdir}/${sesh} 
         # for each MRI run (note: path is specific to Bearden Lab hoffman Prisma data, there are definitely better ways to find all the dcms but this works)
-        for rpath in ${spath}/*Prisma*/*/BEARDEN*/*; do
+        for rpath in ${spath}/*Prisma*/*/*/*; do
             echo $rpath
             run=$(basename $rpath)
             # loop through each individual dicom, copy and rename
