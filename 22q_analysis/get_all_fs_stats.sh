@@ -4,7 +4,7 @@ basepath="/u/project/cbearden/data/"
 
 paths="22q/qunex_studyfolder/sessions/ 22qPrisma/qunex_studyfolder/sessions/ Enigma/SUNY/qunex_studyfolder/sessions/ Enigma/Rome/qunex_studyfolder/sessions/ Enigma/IoP/qunex_studyfolder/sessions/ NAPLS_BOLD/NAPLS2/sessions/S_sessions/"
 
-opath="/u/home/s/schleife"
+opath="/u/home/s/schleife/hcp_fs_vols/"
 
 for studypath in $paths; do
 	# get sessions as any dir in studypath with letter followed by number
